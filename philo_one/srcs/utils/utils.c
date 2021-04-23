@@ -3,30 +3,38 @@
 #include <stdio.h>
 #include "philo_one.h"
 
-long	get_time_interval(struct timeval time_start)
+unsigned long	get_time()
 {
-	struct timeval	time_end;
-	long			ret;
+	struct timeval	current_time;
 
-	gettimeofday(&time_end, NULL);
-	ret = ((time_end.tv_sec - time_start.tv_sec) * 1000000L +
-		   time_end.tv_usec) - time_start.tv_usec;
-	return (ret);
+	gettimeofday(&current_time, NULL);
+	return ((current_time.tv_sec) * 1000 + (current_time.tv_usec) / 1000);
 }
 
-void my_sleep(unsigned int ms)
+unsigned long get_time_interval(unsigned long time)
 {
-	int cnt;
+	return (get_time() - time);
+}
 
-	cnt = 0;
-	while (cnt <= ms)
+int my_sleep(unsigned int ms)
+{
+	unsigned long	current_time;
+	unsigned long	required_time;
+
+	current_time = get_time();
+	required_time = current_time + ms;
+	while (current_time <= required_time)
 	{
-		usleep(5);
-		cnt += 5;
+		if (usleep(10) == 1)
+			return (1);
+		current_time = get_time();
 	}
+	return (SUCCESS);
 }
 
 void	print_philo_message(t_philo philo, t_config config, char *str)
 {
+	pthread_mutex_lock(&g_simulation->print_mutex);
 	printf("%ld - %d %s\n", get_time_interval(config.start_time), philo.id, str);
+	pthread_mutex_unlock(&g_simulation->print_mutex);
 }

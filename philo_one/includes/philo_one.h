@@ -13,20 +13,21 @@
 typedef struct
 {
 	unsigned int number_of_philos;
-	unsigned int time_to_eat;
 	unsigned int time_to_die;
+	unsigned int time_to_eat;
 	unsigned int time_to_sleep;
-	unsigned int number_of_times_each_philo_must_eat;
-	struct timeval start_time;
+	int 		number_of_times_each_philo_must_eat;
+	unsigned long start_time;
 }	t_config;
 
 typedef struct
 {
 	pthread_t philo;
 	unsigned int id;
-	long last_time_eat;
-	pthread_mutex_t left_fork;
-	pthread_mutex_t right_fork;
+	unsigned long last_time_eat;
+	int				eat_count;
+	pthread_mutex_t *left_fork;
+	pthread_mutex_t *right_fork;
 }	t_philo;
 
 typedef struct
@@ -57,12 +58,15 @@ t_simulation * new_simulation(char **argv);
 
 t_philo *new_philos(t_config config);
 
-void init_config(t_config *config, char **argv);
+void init_config(t_config *config, int argc, char **argv);
 
-long	get_time_interval(struct timeval time_start);
+unsigned long get_time_interval(unsigned long time);
 
-void my_sleep(unsigned int ms);
+int my_sleep(unsigned int ms);
 
 void	print_philo_message(t_philo philo, t_config config, char *str);
 
+unsigned long	get_time();
+
+pthread_mutex_t	*get_forks();
 #endif

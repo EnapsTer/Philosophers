@@ -3,6 +3,11 @@
 
 int main(int argc, char **argv)
 {
+	// todo последний аругумент
+	// todo один философ
+	// todo парсинг аргументов
+	// todo free
+	// todo тесты глобальные
 	t_philo *philos;
 
 	g_simulation = new_simulation(argv);

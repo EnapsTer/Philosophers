@@ -7,7 +7,8 @@ t_simulation *new_simulation(char **argv)
 	t_config config;
 
 	simulation = (t_simulation *)malloc(sizeof(t_simulation));
-	init_config(&config, argv);
+	init_config(&config, 0, argv);
 	simulation->config = config;
+	pthread_mutex_init(&simulation->print_mutex, NULL);
 	return (simulation);
 }

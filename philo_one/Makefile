@@ -1,6 +1,17 @@
 NAME		= philo_one
 #####################################sources#######################################
-SRC			= main.c
+INIT		=	srcs/initialization
+PHILOS		=	srcs/philosophers
+SIM			=	srcs/simulation
+UTILS		=	srcs/utils
+SRC			=	srcs/main.c\
+				$(INIT)/config_initialization.c\
+				$(INIT)/philosophers_initialization.c\
+				$(INIT)/simulation_initialization.c\
+				$(PHILOS)/philosophers_live.c\
+				$(PHILOS)/philosophers_threads.c\
+				$(SIM)/simulation.c\
+				$(UTILS)/utils.c
 #####i################################objects#######################################
 OBJ			= $(SRC:.c=.o)
 #####################################flags#######################################
@@ -9,7 +20,7 @@ SANITIZE	= -fsanitize=address
 #####################################headers#######################################
 INC			= includes/
 
-.c.o: $(HDR)
+.c.o:
 	gcc $(CFLAGS) -I$(INC) -c $< -o $(<:.c=.o)
 
 $(NAME): $(OBJ) $(HDR)
