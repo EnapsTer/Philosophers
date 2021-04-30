@@ -4,17 +4,17 @@
 
 int	eat_philo(t_philo *philo, t_config config)
 {
-	pthread_mutex_lock(philo->left_fork);
+	sem_wait(g_simulation->forks_sem);
 	print_philo_message(*philo, config, TAKING_FORK);
-	pthread_mutex_lock(philo->right_fork);
+	sem_wait(g_simulation->forks_sem);
 	print_philo_message(*philo, config, TAKING_FORK);
 	print_philo_message(*philo, config, EATING);
 	philo->last_time_eat = get_time_interval(config.start_time);
 	if (g_simulation->config.times_philo_eat != -1)
 		philo->eat_count++;
 	my_sleep(config.time_to_eat);
-	pthread_mutex_unlock(philo->left_fork);
-	pthread_mutex_unlock(philo->right_fork);
+	sem_post(g_simulation->forks_sem);
+	sem_post(g_simulation->forks_sem);
 	return (SUCCESS);
 }
 

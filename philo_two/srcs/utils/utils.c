@@ -16,7 +16,7 @@ unsigned long	get_time_interval(unsigned long time)
 	return (get_time() - time);
 }
 
-void my_sleep(unsigned int ms)
+void	my_sleep(unsigned int ms)
 {
 	if (ms == 0)
 		return ;
@@ -25,7 +25,9 @@ void my_sleep(unsigned int ms)
 
 void	print_philo_message(t_philo philo, t_config config, char *str)
 {
-	pthread_mutex_lock(&g_simulation->print_mutex);
+	if (g_simulation->is_philo_dead)
+		return ;
+	sem_wait(g_simulation->print_sem);
 	printf("%ld %d %s\n", get_time_interval(config.start_time), philo.id, str);
-	pthread_mutex_unlock(&g_simulation->print_mutex);
+	sem_post(g_simulation->print_sem);
 }

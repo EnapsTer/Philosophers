@@ -1,4 +1,4 @@
-NAME		= philo_one
+NAME		= philo_two
 #####################################sources#######################################
 
 INIT		=	srcs/initialization
@@ -14,16 +14,15 @@ SRC			=	srcs/main.c\
 				$(PHILOS)/philosophers_threads.c\
 				$(SIM)/simulation.c\
 				$(DESTROY)/destroy.c\
-				$(UTILS)/initialization_utils.c\
 				$(UTILS)/utils.c\
 				$(UTILS)/libft.c
 
-#####i################################objects#######################################
+##################################objects#######################################
 OBJ			= $(SRC:.c=.o)
-#####################################flags#######################################
+###################################flags#######################################
 CFLAGS		= -Wall -Wextra -Werror
 SANITIZE	= -fsanitize=address
-#####################################headers#######################################
+#####################################headers####################################
 INC			= includes/
 
 .c.o:

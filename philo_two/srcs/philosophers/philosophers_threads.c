@@ -33,10 +33,7 @@ int	detach_philo_threads(t_philo *philos, t_simulation *simulation)
 	{
 		status = pthread_detach(philos[i].philo);
 		if (status)
-		{
-			printf("threads detach error!\n");
 			return (ERROR);
-		}
 		i++;
 	}
 	return (SUCCESS);
@@ -48,7 +45,8 @@ int	check_philo_death(t_philo philo, t_config config)
 	if (get_time_interval(config.start_time) - philo.last_time_eat > \
 													config.time_to_die + 5)
 	{
-		pthread_mutex_lock(&g_simulation->print_mutex);
+		g_simulation->is_philo_dead = 1;
+		sem_wait(g_simulation->print_sem);
 		printf("%ld %d %s\n", get_time_interval(config.start_time), \
 															philo.id, DIED);
 		return (FAIL);
@@ -69,10 +67,10 @@ int	check_philos_live(t_philo *philos, t_simulation *simulation)
 		cnt = 0;
 		while (i < config.number_of_philos)
 		{
-			if (check_philo_death(philos[i], config) == FAIL)
-				return (FAIL);
 			if (philos[i].eat_count >= g_simulation->config.times_philo_eat)
 				cnt++;
+			if (check_philo_death(philos[i], config) == FAIL)
+				return (FAIL);
 			i++;
 		}
 		if (cnt == config.number_of_philos)

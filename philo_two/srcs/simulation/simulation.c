@@ -3,12 +3,16 @@
 
 int	finishing_simulation(t_simulation *simulation, t_philo *philos)
 {
-	if (g_simulation->forks)
-		destroy_forks(simulation->forks, g_simulation->config);
+	if (g_simulation->forks_sem)
+		destroy_forks(simulation->forks_sem, g_simulation->config);
 	if (philos)
 		destroy_philos(philos);
-	if (simulation->print_mutex.__sig)
-		pthread_mutex_destroy(&simulation->print_mutex);
+	if (g_simulation->print_sem)
+	{
+		sem_unlink("forks_sem");
+		sem_post(g_simulation->print_sem);
+		sem_close(g_simulation->print_sem);
+	}
 	free(simulation);
 	return (SUCCESS);
 }

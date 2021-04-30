@@ -16,7 +16,10 @@ int	main(int argc, char **argv)
 	philos = new_philos();
 	if (!philos)
 		return (1);
-	starting_simulation(g_simulation, philos);
-	finishing_simulation(g_simulation, philos);
+	if (g_simulation->config.times_philo_eat)
+	{
+		starting_simulation(g_simulation, philos);
+		finishing_simulation(g_simulation, philos);
+	}
 	return (0);
 }

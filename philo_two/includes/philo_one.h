@@ -2,7 +2,9 @@
 # define PHILO_ONE_H
 
 # include <pthread.h>
+# include <semaphore.h>
 # include <sys/time.h>
+# include <fcntl.h>
 # define SUCCESS 0
 # define FAIL 1
 # define ERROR -1
@@ -28,16 +30,15 @@ typedef struct s_philo
 	unsigned int	id;
 	unsigned long	last_time_eat;
 	int				eat_count;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
 }	t_philo;
 
 typedef struct s_simulation
 {
 	t_config		config;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	print_mutex;
+	sem_t			*forks_sem;
+	sem_t			*print_sem;
 	unsigned int	threads_count;
+	int				is_philo_dead;
 }	t_simulation;
 
 t_simulation	*g_simulation;
@@ -66,21 +67,19 @@ void			init_config(t_config *config, int argc, char **argv);
 
 unsigned long	get_time_interval(unsigned long time);
 
-void my_sleep(unsigned int ms);
+void			my_sleep(unsigned int ms);
 
 void			print_philo_message(t_philo philo, t_config config, char *str);
 
 unsigned long	get_time(void);
 
-pthread_mutex_t	*get_forks(void);
-
 int				ft_isdigit(int c);
 
 int				is_valid_arguments(int argc, char **argv);
 
-int				destroy_forks(pthread_mutex_t *forks, t_config config);
+int				destroy_forks(sem_t *forks, t_config config);
 
-int destroy_philos(t_philo *philos);
+int				destroy_philos(t_philo *philos);
 
 int				finishing_simulation(t_simulation *simulation, t_philo *philos);
 
