@@ -1,7 +1,7 @@
 #include "philo_one.h"
 #include <stdlib.h>
 
-int destroy_philos(t_philo *philos)
+int	destroy_philos(t_philo *philos)
 {
 	free(philos);
 	return (1);

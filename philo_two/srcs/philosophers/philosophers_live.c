@@ -36,6 +36,8 @@ void	*philo_live(void *p_philo)
 	t_philo	*philo;
 
 	philo = (t_philo *)p_philo;
+	wait_threads_creation();
+	philo->last_time_eat = get_time_interval(g_simulation->config.start_time);
 	if (philo->id % 2 == 0)
 		my_sleep(10);
 	while (1)

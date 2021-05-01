@@ -19,11 +19,11 @@ int	finishing_simulation(t_simulation *simulation, t_philo *philos)
 
 int	starting_simulation(t_simulation *simulation, t_philo *philos)
 {
-	if (create_philo_threads(philos, simulation) == ERROR)
+	if (create_philo_processes(philos, simulation) == ERROR)
 		return (ERROR);
-	if (detach_philo_threads(philos, simulation) == ERROR)
-		return (ERROR);
-	if (check_philos_live(philos, simulation) == ERROR)
-		return (ERROR);
+//	if (detach_philo_threads(philos, simulation) == ERROR)
+//		return (ERROR);
+//	if (check_philo_live(philos, simulation) == ERROR)
+//		return (ERROR);
 	return (SUCCESS);
 }

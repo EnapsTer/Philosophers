@@ -83,4 +83,5 @@ int				destroy_philos(t_philo *philos);
 
 int				finishing_simulation(t_simulation *simulation, t_philo *philos);
 
+void			wait_threads_creation(void);
 #endif

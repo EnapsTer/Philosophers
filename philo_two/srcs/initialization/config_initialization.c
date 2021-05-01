@@ -6,6 +6,8 @@ int	is_valid_arguments(int argc, char **argv)
 	int	i;
 
 	i = 1;
+	if (argc < 5 || argc > 6)
+		return (0);
 	while (i < argc)
 	{
 		if (ft_strlen(argv[i]) > 10 || !is_number(argv[i]))

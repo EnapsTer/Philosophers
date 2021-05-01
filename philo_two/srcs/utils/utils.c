@@ -31,3 +31,9 @@ void	print_philo_message(t_philo philo, t_config config, char *str)
 	printf("%ld %d %s\n", get_time_interval(config.start_time), philo.id, str);
 	sem_post(g_simulation->print_sem);
 }
+
+void 	wait_threads_creation(void)
+{
+	while (g_simulation->threads_count != g_simulation->config.number_of_philos)
+		;
+}

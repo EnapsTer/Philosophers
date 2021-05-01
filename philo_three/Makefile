@@ -1,4 +1,4 @@
-NAME		= philo_two
+NAME		= philo_three
 #####################################sources#######################################
 
 INIT		=	srcs/initialization
@@ -11,7 +11,9 @@ SRC			=	srcs/main.c\
 				$(INIT)/philosophers_initialization.c\
 				$(INIT)/simulation_initialization.c\
 				$(PHILOS)/philosophers_live.c\
-				$(PHILOS)/philosophers_threads.c\
+				$(PHILOS)/philosophers_processes.c\
+				$(PHILOS)/philosopher_supervisor.c\
+				$(PHILOS)/philosopher_supervisor_check.c\
 				$(SIM)/simulation.c\
 				$(DESTROY)/destroy.c\
 				$(UTILS)/utils.c\

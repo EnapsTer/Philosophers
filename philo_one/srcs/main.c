@@ -15,7 +15,10 @@ int	main(int argc, char **argv)
 		return (1);
 	philos = new_philos();
 	if (!philos)
+	{
+		finishing_simulation(g_simulation, philos);
 		return (1);
+	}
 	starting_simulation(g_simulation, philos);
 	finishing_simulation(g_simulation, philos);
 	return (0);

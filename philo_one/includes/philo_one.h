@@ -66,7 +66,7 @@ void			init_config(t_config *config, int argc, char **argv);
 
 unsigned long	get_time_interval(unsigned long time);
 
-void my_sleep(unsigned int ms);
+void			my_sleep(unsigned int ms);
 
 void			print_philo_message(t_philo philo, t_config config, char *str);
 
@@ -80,8 +80,9 @@ int				is_valid_arguments(int argc, char **argv);
 
 int				destroy_forks(pthread_mutex_t *forks, t_config config);
 
-int destroy_philos(t_philo *philos);
+int				destroy_philos(t_philo *philos);
 
 int				finishing_simulation(t_simulation *simulation, t_philo *philos);
 
+void			wait_threads_creation(void);
 #endif

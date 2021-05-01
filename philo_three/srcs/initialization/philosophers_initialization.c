@@ -26,6 +26,7 @@ t_philo	*new_philos(void)
 		philos[i].id = i + 1;
 		init_eat_count(philos + i);
 		philos[i].last_time_eat = get_time_interval(config.start_time);
+		philos[i].is_eaten = 0;
 		i++;
 	}
 	return (philos);

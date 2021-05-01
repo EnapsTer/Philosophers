@@ -10,7 +10,8 @@ int	create_philo_threads(t_philo *philos, t_simulation *simulation)
 	i = 0;
 	while (i < simulation->config.number_of_philos)
 	{
-		status = pthread_create(&philos[i].philo, NULL, philo_live, philos + i);
+		status = pthread_create(&philos[i].philo, NULL, philo_live, \
+						  								(void *)(philos + i));
 		if (status)
 		{
 			printf("threads creation error!\n");
@@ -62,7 +63,9 @@ int	check_philos_live(t_philo *philos, t_simulation *simulation)
 	unsigned int	cnt;
 	t_config		config;
 
+	g_simulation->config.start_time = get_time();
 	config = simulation->config;
+	wait_threads_creation();
 	while (1)
 	{
 		i = 0;
