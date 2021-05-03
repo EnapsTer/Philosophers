@@ -4,7 +4,7 @@
 
 int	check_philo_death(t_philo philo, t_config config)
 {
-	usleep(10);
+	usleep(20);
 	if (get_time_interval(config.start_time) - philo.last_time_eat > \
 													config.time_to_die + 5)
 	{
@@ -17,7 +17,7 @@ int	check_philo_death(t_philo philo, t_config config)
 	return (SUCCESS);
 }
 
-void *check_philo_live(void *p_philo)
+void	*check_philo_live(void *p_philo)
 {
 	t_philo		*philo;
 	t_config	config;

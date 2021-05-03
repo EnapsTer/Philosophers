@@ -15,7 +15,7 @@ int	detach_supervisor(pthread_t *supervisor)
 
 int	create_supervisor(pthread_t *supervisor, t_philo *philo)
 {
-	int status;
+	int	status;
 
 	status = pthread_create(supervisor, NULL, check_philo_live, (void *)philo);
 	if (status)
@@ -31,6 +31,8 @@ int	start_supervisor(t_philo *philo)
 {
 	pthread_t	supervisor;
 
+	g_simulation->config.start_time = get_time();
+	philo->last_time_eat = get_time_interval(g_simulation->config.start_time);
 	if (create_supervisor(&supervisor, philo) == ERROR)
 		return (ERROR);
 	if (detach_supervisor(&supervisor) == ERROR)

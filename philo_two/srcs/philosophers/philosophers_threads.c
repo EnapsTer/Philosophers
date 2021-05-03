@@ -39,10 +39,9 @@ int	detach_philo_threads(t_philo *philos, t_simulation *simulation)
 	return (SUCCESS);
 }
 
-// TODO доделать ожидание всех тредов и процессов
 int	check_philo_death(t_philo philo, t_config config)
 {
-	usleep(10);
+	usleep(20);
 	if (get_time_interval(config.start_time) - philo.last_time_eat > \
 													config.time_to_die + 5)
 	{
@@ -61,9 +60,9 @@ int	check_philos_live(t_philo *philos, t_simulation *simulation)
 	unsigned int	cnt;
 	t_config		config;
 
-	g_simulation->config.start_time = get_time();
 	config = simulation->config;
 	wait_threads_creation();
+	g_simulation->config.start_time = get_time();
 	while (1)
 	{
 		i = 0;

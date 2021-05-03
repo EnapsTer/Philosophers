@@ -5,7 +5,7 @@
 int	create_philo_processes(t_philo *philos, t_simulation *simulation)
 {
 	unsigned int	i;
-	// TODO попробовать дожидаться философов wait for thread creation
+
 	i = 0;
 	while (i < simulation->config.number_of_philos)
 	{
@@ -16,13 +16,16 @@ int	create_philo_processes(t_philo *philos, t_simulation *simulation)
 			return (ERROR);
 		}
 		else if (philos[i].philo_pid == 0)
-		{
 			philo_live(philos + i);
-		}
 		else
 			i++;
 	}
-	sem_wait(g_simulation->is_sim_end_sem);
+	i = 0;
+	while (i < simulation->config.number_of_philos)
+	{
+		sem_post(simulation->is_all_forks_created);
+		i++;
+	}
 	sem_wait(g_simulation->is_sim_end_sem);
 	kill_all_processes(philos, g_simulation->config);
 	return (SUCCESS);

@@ -38,7 +38,7 @@ typedef struct s_philo
 	unsigned int	id;
 	unsigned long	last_time_eat;
 	int				eat_count;
-	int 			is_eaten;
+	int				is_eaten;
 }	t_philo;
 
 typedef struct s_simulation
@@ -47,17 +47,17 @@ typedef struct s_simulation
 	sem_t			*forks_sem;
 	sem_t			*print_sem;
 	sem_t			*is_sim_end_sem;
+	sem_t			*is_all_forks_created;
 }	t_simulation;
 
 t_simulation	*g_simulation;
 
 int				starting_simulation(t_simulation *simulation, t_philo *philos);
 
-int				create_philo_processes(t_philo *philos, t_simulation *simulation);
+int				create_philo_processes(t_philo *philos, \
+													t_simulation *simulation);
 
-int				detach_philo_threads(t_philo *philos, t_simulation *simulation);
-
-void * check_philo_live(void *p_philo);
+void			*check_philo_live(void *p_philo);
 
 void			*philo_live(void *p_philo);
 

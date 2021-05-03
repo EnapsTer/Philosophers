@@ -36,9 +36,11 @@ void	*philo_live(void *p_philo)
 	t_philo	*philo;
 
 	philo = (t_philo *)p_philo;
+	sem_wait(g_simulation->is_all_forks_created);
 	start_supervisor(philo);
 	if (philo->id % 2 == 0)
 		my_sleep(60);
+	philo->last_time_eat = get_time_interval(g_simulation->config.start_time);
 	while (philo->is_eaten == 0)
 	{
 		eat_philo(philo, g_simulation->config);

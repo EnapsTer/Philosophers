@@ -63,9 +63,9 @@ int	check_philos_live(t_philo *philos, t_simulation *simulation)
 	unsigned int	cnt;
 	t_config		config;
 
-	g_simulation->config.start_time = get_time();
 	config = simulation->config;
 	wait_threads_creation();
+	g_simulation->config.start_time = get_time();
 	while (1)
 	{
 		i = 0;
