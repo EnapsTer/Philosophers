@@ -72,13 +72,16 @@ int	check_philos_live(t_philo *philos, t_simulation *simulation)
 		cnt = 0;
 		while (i < config.number_of_philos)
 		{
-			if (check_philo_death(philos[i], config) == FAIL)
-				return (FAIL);
 			if (philos[i].eat_count >= g_simulation->config.times_philo_eat)
 				cnt++;
+			if (cnt == config.number_of_philos)
+			{
+				pthread_mutex_lock(&g_simulation->print_mutex);
+				return (SUCCESS);
+			}
+			else if (check_philo_death(philos[i], config) == FAIL)
+				return (FAIL);
 			i++;
 		}
-		if (cnt == config.number_of_philos)
-			return (SUCCESS);
 	}
 }

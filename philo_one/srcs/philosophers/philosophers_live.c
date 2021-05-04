@@ -43,7 +43,10 @@ void	*philo_live(void *p_philo)
 	while (1)
 	{
 		eat_philo(philo, g_simulation->config);
+		if (philo->eat_count >= g_simulation->config.times_philo_eat)
+			break ;
 		sleep_philo(philo, g_simulation->config);
 		think_philo(philo, g_simulation->config);
 	}
+	return (NULL);
 }

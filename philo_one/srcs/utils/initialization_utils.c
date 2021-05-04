@@ -5,10 +5,8 @@ pthread_mutex_t	*get_forks(void)
 {
 	pthread_mutex_t	*forks;
 	t_config		config;
-	int				i;
 
 	config = g_simulation->config;
-	i = 0;
 	if (config.number_of_philos > 1)
 		forks = (pthread_mutex_t *)malloc(\
 		sizeof(pthread_mutex_t) * config.number_of_philos);
