@@ -38,16 +38,16 @@ typedef struct s_philo
 	unsigned int	id;
 	unsigned long	last_time_eat;
 	int				eat_count;
-	int				is_eaten;
 }	t_philo;
 
 typedef struct s_simulation
 {
 	t_config		config;
-	sem_t			*forks_sem;
-	sem_t			*print_sem;
-	sem_t			*is_sim_end_sem;
-	sem_t			*is_all_forks_created;
+	sem_t			*forks;
+	sem_t			*print_lock;
+	sem_t			*is_sim_end;
+	sem_t			*is_proc_created;
+	sem_t			*is_eaten;
 }	t_simulation;
 
 t_simulation	*g_simulation;
