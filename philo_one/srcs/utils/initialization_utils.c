@@ -1,4 +1,4 @@
-#include "philo_one.h"
+#include "philo.h"
 #include <stdlib.h>
 
 pthread_mutex_t	*get_forks(void)

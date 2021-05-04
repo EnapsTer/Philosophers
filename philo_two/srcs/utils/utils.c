@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include <stdio.h>
-#include "philo_one.h"
+#include "philo.h"
 
 unsigned long	get_time(void)
 {

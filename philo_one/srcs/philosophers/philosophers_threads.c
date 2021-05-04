@@ -1,4 +1,4 @@
-#include "philo_one.h"
+#include "philo.h"
 #include <stdio.h>
 #include <unistd.h>
 

@@ -1,18 +1,23 @@
-#include "philo_one.h"
+#include "philo.h"
 #include <stdlib.h>
 
 int	finishing_simulation(t_simulation *simulation, t_philo *philos)
 {
-	if (g_simulation->forks_sem)
-		destroy_forks(simulation->forks_sem, g_simulation->config);
 	if (philos)
 		destroy_philos(philos);
-	if (g_simulation->print_sem)
+	if (g_simulation->forks)
+		destroy_forks(simulation->forks, g_simulation->config);
+	if (g_simulation->print_lock)
 	{
-		sem_unlink("forks_sem");
-		sem_post(g_simulation->print_sem);
-		sem_close(g_simulation->print_sem);
+		sem_post(g_simulation->print_lock);
+		sem_close(g_simulation->print_lock);
 	}
+	if (g_simulation->is_eaten)
+		sem_close(g_simulation->is_eaten);
+	if (g_simulation->is_proc_created)
+		sem_close(g_simulation->is_proc_created);
+	if (g_simulation->is_sim_end)
+		sem_close(g_simulation->is_sim_end);
 	free(simulation);
 	return (SUCCESS);
 }

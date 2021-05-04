@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "philo_one.h"
+#include "philo.h"
 
 int	main(int argc, char **argv)
 {

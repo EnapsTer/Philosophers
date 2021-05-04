@@ -1,4 +1,4 @@
-#include "philo_one.h"
+#include "philo.h"
 
 int	detach_supervisor(pthread_t *supervisor)
 {

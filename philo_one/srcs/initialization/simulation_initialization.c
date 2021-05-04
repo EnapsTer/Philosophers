@@ -1,4 +1,4 @@
-#include "philo_one.h"
+#include "philo.h"
 #include <stdlib.h>
 
 t_simulation	*new_simulation(int argc, char **argv)

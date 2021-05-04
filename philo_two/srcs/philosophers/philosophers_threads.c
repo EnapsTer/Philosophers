@@ -1,4 +1,4 @@
-#include "philo_one.h"
+#include "philo.h"
 #include <stdio.h>
 #include <unistd.h>
 
@@ -71,11 +71,14 @@ int	check_philos_live(t_philo *philos, t_simulation *simulation)
 		{
 			if (philos[i].eat_count >= g_simulation->config.times_philo_eat)
 				cnt++;
-			if (check_philo_death(philos[i], config) == FAIL)
+			if (cnt == config.number_of_philos)
+			{
+				sem_wait(g_simulation->print_sem);
+				return (SUCCESS);
+			}
+			else if (check_philo_death(philos[i], config) == FAIL)
 				return (FAIL);
 			i++;
 		}
-		if (cnt == config.number_of_philos)
-			return (SUCCESS);
 	}
 }

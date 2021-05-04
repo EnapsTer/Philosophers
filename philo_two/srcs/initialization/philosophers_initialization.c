@@ -1,4 +1,4 @@
-#include "philo_one.h"
+#include "philo.h"
 #include <stdlib.h>
 
 void	init_eat_count(t_philo *philo)

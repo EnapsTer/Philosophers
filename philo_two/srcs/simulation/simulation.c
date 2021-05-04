@@ -1,4 +1,4 @@
-#include "philo_one.h"
+#include "philo.h"
 #include <stdlib.h>
 
 int	finishing_simulation(t_simulation *simulation, t_philo *philos)

@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "philo_one.h"
+#include "philo.h"
 #include "unistd.h"
 #include <stdio.h>
 #include <stdlib.h>

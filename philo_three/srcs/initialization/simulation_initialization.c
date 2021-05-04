@@ -1,4 +1,4 @@
-#include "philo_one.h"
+#include "philo.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -14,26 +14,29 @@ int	is_sem_created(sem_t *sem)
 
 int	init_semaphores(t_simulation *simulation, t_config config)
 {
-	sem_unlink("is_all_processes_created");
-	simulation->is_all_forks_created = sem_open("is_all_processes_created", \
+	sem_unlink("is_proc_created");
+	simulation->is_proc_created = sem_open("is_proc_created", \
 												 O_CREAT | O_EXCL, 0644, 1);
-	if (is_sem_created(simulation->is_all_forks_created) == ERROR)
+	if (is_sem_created(simulation->is_proc_created) == ERROR)
 		return (ERROR);
-	sem_wait(simulation->is_all_forks_created);
-	sem_unlink("is_dead_sem");
-	simulation->is_sim_end_sem = sem_open("is_dead_sem", \
-									   			O_CREAT | O_EXCL, 0644, 1);
-	if (is_sem_created(simulation->is_sim_end_sem) == ERROR)
+	sem_wait(simulation->is_proc_created);
+	sem_unlink("is_dead");
+	simulation->is_sim_end = sem_open("is_dead", O_CREAT | O_EXCL, 0644, 1);
+	if (is_sem_created(simulation->is_sim_end) == ERROR)
 		return (ERROR);
-	sem_wait(simulation->is_sim_end_sem);
-	sem_unlink("forks_sem");
-	simulation->forks_sem = sem_open("forks_sem", O_CREAT | O_EXCL, 0644, \
+	sem_wait(simulation->is_sim_end);
+	sem_unlink("forks");
+	simulation->forks = sem_open("forks", O_CREAT | O_EXCL, 0644, \
 								  config.number_of_philos);
-	if (is_sem_created(simulation->forks_sem) == ERROR)
+	if (is_sem_created(simulation->forks) == ERROR)
 		return (ERROR);
-	sem_unlink("print_sem");
-	simulation->print_sem = sem_open("print_sem", O_CREAT | O_EXCL, 0644, 1);
-	if (is_sem_created(simulation->print_sem) == ERROR)
+	sem_unlink("print_lock");
+	simulation->print_lock = sem_open("print_lock", O_CREAT | O_EXCL, 0644, 1);
+	if (is_sem_created(simulation->print_lock) == ERROR)
+		return (ERROR);
+	sem_unlink("is_eaten");
+	simulation->is_eaten = sem_open("is_eaten", O_CREAT | O_EXCL, 0644, 1);
+	if (is_sem_created(simulation->is_eaten) == ERROR)
 		return (ERROR);
 	return (SUCCESS);
 }

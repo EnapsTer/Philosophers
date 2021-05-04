@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include <stdio.h>
-#include "philo_one.h"
+#include "philo.h"
 
 unsigned long	get_time(void)
 {
@@ -25,9 +25,12 @@ void	my_sleep(unsigned int ms)
 
 void	print_philo_message(t_philo philo, t_config config, char *str)
 {
-	sem_wait(g_simulation->print_sem);
-	printf("%ld %d %s\n", get_time_interval(config.start_time), philo.id, str);
-	sem_post(g_simulation->print_sem);
+	long int	time;
+
+	time = get_time_interval(config.start_time);
+	sem_wait(g_simulation->print_lock);
+	printf("%ld %d %s\n", time, philo.id, str);
+	sem_post(g_simulation->print_lock);
 }
 
 void	kill_all_processes(t_philo *philos, t_config config)

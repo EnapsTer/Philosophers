@@ -1,4 +1,4 @@
-#include "philo_one.h"
+#include "philo.h"
 #include "libft.h"
 
 int	is_valid_arguments(int argc, char **argv)

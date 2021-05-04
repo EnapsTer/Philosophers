@@ -1,6 +1,5 @@
-#include "philo_one.h"
+#include "philo.h"
 #include <stdio.h>
-#include <unistd.h>
 
 int	eat_philo(t_philo *philo, t_config config)
 {
